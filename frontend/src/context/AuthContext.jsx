@@ -20,14 +20,6 @@ export function AuthProvider({ children }) {
   }, []);
 
   const login = async (username, password) => {
-    // Hardcoded bypass for easy login during debugging
-    if (username === 'admin' && password === 'admin123') {
-      const dummyUser = { username: 'admin', id: 999, is_staff: true };
-      setUser(dummyUser);
-      localStorage.setItem('authToken', 'bypass-token');
-      return;
-    }
-
     const res = await authAPI.login(username, password);
     localStorage.setItem('authToken', res.data.token);
     const me = await authAPI.me();
