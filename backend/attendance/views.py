@@ -204,7 +204,7 @@ class MonthlyAttendanceView(APIView):
 
 class DashboardView(APIView):
     """Admin: Monthly summary of all employees."""
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def get(self, request):
         year = int(request.query_params.get('year', timezone.now().year))
@@ -237,7 +237,7 @@ class DashboardView(APIView):
 
 class ManualAttendanceView(APIView):
     """Admin: Create or update attendance record manually."""
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def post(self, request):
         employee_id = request.data.get('employee_id')
@@ -288,7 +288,7 @@ class ManualAttendanceView(APIView):
 
 class AllAttendanceView(APIView):
     """Admin: Paginated attendance log for filtering."""
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def get(self, request):
         queryset = AttendanceRecord.objects.all().order_by('-date')
@@ -309,7 +309,7 @@ class AllAttendanceView(APIView):
 
 class LeaveRequestListCreateView(APIView):
     """Admin: List all leaves and create new ones."""
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def get(self, request):
         leaves = LeaveRequest.objects.all().order_by('-created_at')
@@ -333,7 +333,7 @@ class LeaveRequestListCreateView(APIView):
 
 class LeaveRequestUpdateView(APIView):
     """Admin: Update leave request status (Approve/Reject)."""
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def patch(self, request, pk):
         try:

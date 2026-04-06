@@ -151,6 +151,9 @@ if 'CLOUDINARY_CLOUD_NAME' in os.environ:
 CORS_ALLOW_ALL_ORIGINS = True  # For dev purposes, allows Vite frontend
 
 REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.BasicAuthentication',
