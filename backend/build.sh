@@ -9,10 +9,8 @@ pip install -r requirements.txt
 python manage.py migrate
 
 # Create superuser from environment variables if they are provided
+# The '|| true' part ensures the build doesn't fail if the user already exists
 if [[ -n "${DJANGO_SUPERUSER_PASSWORD}" ]]; then
     echo "Creating superuser..."
     python manage.py createsuperuser --noinput --username admin --email admin@example.com || true
-
-    echo "Updating admin password to ensure it matches the environment variable..."
-    python manage.py shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); u = User.objects.filter(username='admin').first(); u.set_password('${DJANGO_SUPERUSER_PASSWORD}'); u.save(); print('Password updated successfully.')" || true
 fi
